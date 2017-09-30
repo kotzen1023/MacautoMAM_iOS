@@ -169,7 +169,7 @@
     NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:self delegateQueue:[NSOperationQueue mainQueue]];
     
     //Now create a request to the URL
-    NSURL *url = [NSURL URLWithString:@"http://60.249.239.47:8920/service.asmx"];
+    NSURL *url = [NSURL URLWithString:@"http://60.249.239.47:9571/service.asmx"];
     NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url];
     NSString *msgLength = [NSString stringWithFormat:@"%lu", (unsigned long)[_soapMessage length]];
     

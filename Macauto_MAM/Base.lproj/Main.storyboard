@@ -232,23 +232,23 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new" translatesAutoresizingMaskIntoConstraints="NO" id="lgw-ay-jWK">
-                                                    <rect key="frame" x="16" y="16" width="20" height="20"/>
+                                                    <rect key="frame" x="16" y="8" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="AJ8-tz-ZAB"/>
                                                         <constraint firstAttribute="width" constant="20" id="fJJ-JL-hHL"/>
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFq-ac-M0E">
-                                                    <rect key="frame" x="44" y="16" width="268" height="21"/>
+                                                    <rect key="frame" x="40" y="12" width="272" height="25"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4c6-0j-hrB" userLabel="title">
-                                                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="21"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="190.5" height="25"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIk-Jl-Pe2" userLabel="time">
-                                                            <rect key="frame" x="187.5" y="0.0" width="80.5" height="21"/>
+                                                            <rect key="frame" x="190.5" y="0.0" width="81.5" height="25"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -263,10 +263,10 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="lFq-ac-M0E" secondAttribute="bottom" constant="7.5" id="Oo1-88-0WD"/>
                                                 <constraint firstItem="lFq-ac-M0E" firstAttribute="trailing" secondItem="SRQ-qq-QDE" secondAttribute="trailingMargin" id="Vqa-it-LwJ"/>
-                                                <constraint firstItem="lgw-ay-jWK" firstAttribute="top" secondItem="SRQ-qq-QDE" secondAttribute="topMargin" constant="8" id="iJb-1E-bbb"/>
+                                                <constraint firstItem="lgw-ay-jWK" firstAttribute="top" secondItem="SRQ-qq-QDE" secondAttribute="topMargin" id="iJb-1E-bbb"/>
                                                 <constraint firstItem="lgw-ay-jWK" firstAttribute="leading" secondItem="SRQ-qq-QDE" secondAttribute="leadingMargin" constant="8" id="klR-DR-nWV"/>
-                                                <constraint firstItem="lFq-ac-M0E" firstAttribute="top" secondItem="SRQ-qq-QDE" secondAttribute="topMargin" constant="8" id="mmS-TY-s2d"/>
-                                                <constraint firstItem="lFq-ac-M0E" firstAttribute="leading" secondItem="lgw-ay-jWK" secondAttribute="trailing" constant="8" id="p4d-mQ-3Hr"/>
+                                                <constraint firstItem="lFq-ac-M0E" firstAttribute="top" secondItem="SRQ-qq-QDE" secondAttribute="topMargin" constant="4" id="mmS-TY-s2d"/>
+                                                <constraint firstItem="lFq-ac-M0E" firstAttribute="leading" secondItem="lgw-ay-jWK" secondAttribute="trailing" constant="4" id="p4d-mQ-3Hr"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
