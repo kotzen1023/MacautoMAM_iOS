@@ -34,5 +34,7 @@
 @property NSString *user_id;
 @property NSString *uuid;
 
+@property int status_bar_height;
+@property long unread_sp_count;
 @end
 

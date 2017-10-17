@@ -49,6 +49,7 @@
     
     [UIView animateWithDuration:2.0 animations:^{
         [_header setAlpha:1.0f];
+        _header.text = NSLocalizedString(@"MACAUTO_MAM", nil);
         
     } completion:^(BOOL finished) {
         

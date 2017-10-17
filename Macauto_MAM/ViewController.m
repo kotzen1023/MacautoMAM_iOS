@@ -30,13 +30,15 @@
 
 @property BOOL update;
 @property ThemeColor *themeColor;
+@property NSDate *today;
+@property NSDateFormatter *dateFormat;
 @end
 
 @implementation ViewController
 
 @synthesize activityIndicator;
 @synthesize soapMessage, webResponseData, currentElement;
-@synthesize user_id, uuid;
+@synthesize user_id, uuid, status_bar_height, unread_sp_count;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -58,12 +60,15 @@
     [self initLoading];
     [self initItemShow];
     
-    if ([self initObserver] != nil) {
-        NSLog(@"initObserver success!");
-    }
+    //if ([self initObserver] != nil) {
+    //    NSLog(@"initObserver success!");
+    //}
 }
 
 - (void) viewDidAppear:(BOOL)animated {
+    _today = [NSDate date];
+    _dateFormat = [[NSDateFormatter alloc] init];
+    [_dateFormat setDateFormat:@"yyyy-MM-dd"];
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(orientationChanged:)
@@ -79,6 +84,9 @@
     //set filter = false
     _isFiltered = false;
     
+    if ([self initObserver] != nil) {
+        NSLog(@"initObserver success!");
+    }
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -96,6 +104,8 @@
     
     [tableView reloadData];
     
+    _update = false;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -106,7 +116,7 @@
 - (void) orientationChanged:(NSNotification *)note{
     UIDevice *device = [UIDevice currentDevice];
     
-    int status_bar_height = self.topLayoutGuide.length-self.navigationController.navigationBar.frame.size.height;
+    status_bar_height = self.topLayoutGuide.length-self.navigationController.navigationBar.frame.size.height;
     
     int width = self.view.bounds.size.width;
     int height = self.view.bounds.size.height;
@@ -219,20 +229,46 @@
     }
     
     UILabel *subject = (UILabel *)[cell viewWithTag:100];
+    UILabel *day = (UILabel *)[cell viewWithTag:103];
     //subject.textColor = [UIColor colorWithRed:(120/255.0) green:(120/255.0) blue:(120/255.0) alpha:1.0];
     //subject.text = item.title;
     NSLog(@"%@-%@-%@", item.customer, item.edi_type, item.interchange_ctrl_id);
     
     subject.text = [NSString stringWithFormat:@"%@-%@-%@", item.customer, item.edi_type, item.interchange_ctrl_id];
     
+    
     UILabel *time = (UILabel *) [cell viewWithTag:101];
     //time.textColor = [UIColor colorWithRed:(120/255.0) green:(120/255.0) blue:(120/255.0) alpha:1.0];
     
-    NSArray *end_spit = [item.date componentsSeparatedByString:@" "];
+    NSString *todayDateString = [_dateFormat stringFromDate:_today];
     
-    NSString *new_time = [end_spit[1] substringToIndex:[end_spit[1] length] - 3];
+    NSArray *end_split = [item.date componentsSeparatedByString:@" "];
+    
+    NSString *new_time = [end_split[1] substringToIndex:[end_split[1] length] - 3];
     
     time.text = new_time;
+    
+    if ([end_split[0] isEqualToString:todayDateString]) {
+        day.text = NSLocalizedString(@"DATE_TODAY", nil);
+    } else {
+        NSString *year_string = [end_split[0] substringToIndex:[end_split[0] length] - 6];
+        NSString *year_today = [todayDateString substringToIndex:[todayDateString length] - 6];
+        if ([year_today isEqualToString:year_string]) { //same year
+            NSString *dateString = [end_split[0] substringFromIndex:5];
+            dateString = [dateString stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
+            
+            day.text = dateString;
+        } else {
+            NSString *dateString = [end_split[0] stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
+            day.text = dateString;
+        }
+        
+    }
+    //NSArray *end_spit = [item.date componentsSeparatedByString:@" "];
+    
+    //NSString *new_time = [end_spit[1] substringToIndex:[end_spit[1] length] - 3];
+    
+    //time.text = new_time;
     
     UIImageView *imageView = (UIImageView *) [cell viewWithTag:102];
     
@@ -380,7 +416,7 @@
 
 -(void) initItemShow {
     huiView = [[UIScrollView alloc] initWithFrame:CGRectMake(
-                                                             (self.view.bounds.size.width), self.topLayoutGuide.length-self.navigationController.navigationBar.frame.size.height,
+                                                             (self.view.bounds.size.height), self.topLayoutGuide.length-self.navigationController.navigationBar.frame.size.height,
                                                              self.view.bounds.size.width,
                                                              self.view.bounds.size.height)];
     huiView.backgroundColor = [UIColor colorWithRed:(255/255.0) green:(255/255.0) blue:(255/255.0) alpha:1.0];
@@ -395,29 +431,33 @@
     [btnBack addTarget:self action:@selector(backPersonalMeeting:) forControlEvents:(UIControlEventTouchUpInside)];
     [huiView addSubview:btnBack];
     
-    //ID
-    lbl_title_header = [[UILabel alloc] initWithFrame:CGRectMake(5, 30, 80, 21)];
-    //[lbl_title_header setTextColor: [UIColor whiteColor]];
-    //[lbl_title_header setText:  NSLocalizedString(@"MEETING_SHOW_DETAIL_ID", nil)] ;
-    [lbl_title_header setText: NSLocalizedString(@"MSG_TITLE", nil)];
-    [huiView addSubview:lbl_title_header];
-    
-    lbl_title_show = [[UILabel alloc] initWithFrame:CGRectMake(105, 30, self.view.bounds.size.width-100, 21)];
-    //[lbl_title_show setTextColor: [UIColor whiteColor]];
-    //[lbl_ID_show setTextAlignment:NSTextAlignmentCenter];
-    [huiView addSubview:lbl_title_show];
     
     //Start time (h: 30+21+5
-    lbl_time_header = [[UILabel alloc] initWithFrame:CGRectMake(5, 56, 80, 21)];
+    lbl_time_header = [[UILabel alloc] initWithFrame:CGRectMake(5, 30, 80, 21)];
     //[lbl_time_header setTextColor:[UIColor whiteColor]];
     //[lbl_time_header setText: NSLocalizedString(@"MEETING_SHOW_DETAIL_START_TIME", nil)];
     [lbl_time_header setText:NSLocalizedString(@"MSG_TIME", nil)];
     [huiView addSubview:lbl_time_header];
     
-    lbl_time_show = [[UILabel alloc] initWithFrame:CGRectMake(105, 56, self.view.bounds.size.width-100, 21)];
+    lbl_time_show = [[UILabel alloc] initWithFrame:CGRectMake(105, 30, self.view.bounds.size.width-100, 21)];
     //[lbl_time_show setTextColor:[UIColor whiteColor]];
     //[lbl_Start_time_show setTextAlignment:NSTextAlignmentCenter];
     [huiView addSubview: lbl_time_show];
+    
+    //ID
+    lbl_title_header = [[UILabel alloc] initWithFrame:CGRectMake(5, 56, 80, 210)];
+    //[lbl_title_header setTextColor: [UIColor whiteColor]];
+    //[lbl_title_header setText:  NSLocalizedString(@"MEETING_SHOW_DETAIL_ID", nil)] ;
+    [lbl_title_header setText: NSLocalizedString(@"MSG_TITLE", nil)];
+    [huiView addSubview:lbl_title_header];
+    
+    lbl_title_show = [[UILabel alloc] initWithFrame:CGRectMake(105, 56, self.view.bounds.size.width-100, 210)];
+    lbl_title_show.numberOfLines = 0;
+    //[lbl_title_show sizeToFit];
+    //[lbl_title_show setTextColor: [UIColor whiteColor]];
+    //[lbl_ID_show setTextAlignment:NSTextAlignmentCenter];
+    [huiView addSubview:lbl_title_show];
+    
     
     //End time (h: 30+26+26
     //lbl_msg_header = [[UILabel alloc] initWithFrame:CGRectMake(5, 82, 80, 21)];
@@ -678,7 +718,7 @@
     //ad required headers to the request
     [theRequest addValue:@"60.249.239.47" forHTTPHeaderField:@"Host"];
     [theRequest addValue: @"text/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    [theRequest addValue: @"http://tempuri.org/Update_Read_Status" forHTTPHeaderField:@"SOAPAction"];
+    [theRequest addValue: @"http://tempuri.org/Update_EDI_Read_Status" forHTTPHeaderField:@"SOAPAction"];
     [theRequest addValue: msgLength forHTTPHeaderField:@"Content-Length"];
     [theRequest setHTTPMethod:@"POST"];
     [theRequest setHTTPBody: [soapMessage dataUsingEncoding:NSUTF8StringEncoding]];
@@ -749,10 +789,19 @@
         
         // Run the parser
         @try{
+            unread_sp_count = 0;
             BOOL parsingResult = [xmlParser parse];
             NSLog(@"parsing result = %d",parsingResult);
             NSLog(@"notify_count = %ld", _notifyList.count );
             
+            [UIApplication sharedApplication].applicationIconBadgeNumber = unread_sp_count;
+            
+            //save badge to default
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            if (unread_sp_count >= 0) {
+                NSString *unread_badge = [NSString stringWithFormat:@"%ld", unread_sp_count];
+                [defaults setObject:unread_badge forKey:@"Badge"];
+            }
             //for(int i=0;i<_personalMeetingList.count; i++) {
             //    MeetingItem *item = [_personalMeetingList objectAtIndex:i];
             //NSLog(@"<subject %03d> %@", i, item.subject);
@@ -819,9 +868,9 @@
     } else if ([elementName isEqualToString:@"room_name"]) {
         _isRoomName = true;
     }
-    else if ([elementName isEqualToString:@"Update_Read_StatusResponse"]) {
+    else if ([elementName isEqualToString:@"Update_EDI_Read_StatusResponse"]) {
         _update = true;
-    } else if([elementName isEqualToString:@"Update_Read_StatusResult"]) {
+    } else if([elementName isEqualToString:@"Update_EDI_Read_StatusResult"]) {
         NSLog(@"<%@>", elementName);
     }
 }
@@ -893,16 +942,39 @@
             NSLog(@"<%@>%@</%@>", _elementStart, _elementValue, _elementEnd);
             
             [_item setReadSp:_elementValue];
+            if ([[_item sp] isEqualToString:@"N"]) {
+                unread_sp_count++;
+            }
         }
-    } else if ([elementName isEqualToString:@"Update_Read_StatusResponse"]) {
+    } else if ([elementName isEqualToString:@"Update_EDI_Read_StatusResponse"]) {
         _update = false;
-    } else if([elementName isEqualToString:@"Update_Read_StatusResult"]) {
+    } else if([elementName isEqualToString:@"Update_EDI_Read_StatusResult"]) {
         NSLog(@"value = %@", _elementValue);
         NSLog(@"</%@>", elementName);
         
         if ([_elementValue isEqualToString:@"OK"]) {
             
             NSLog(@"update readSp success!");
+            
+            //load badge
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *unread_badge = [defaults objectForKey:@"Badge"];
+            unread_sp_count = [unread_badge intValue];
+            
+            NSLog(@"current badge = %ld", unread_sp_count);
+            if (unread_sp_count > 0) {
+                
+                
+                unread_sp_count--;
+                //[UIApplication sharedApplication].applicationIconBadgeNumber = unread_sp_count;
+                
+                //save badge to default
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                if (unread_sp_count > 0) {
+                    NSString *unread_badge = [NSString stringWithFormat:@"%ld", unread_sp_count];
+                    [defaults setObject:unread_badge forKey:@"Badge"];
+                }
+            }
         } else {
             NSLog(@"update readSp failed!");
         }

@@ -24,6 +24,7 @@
 		5E51F6371ECEE60B00B66255 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E51F6351ECEE60B00B66255 /* LaunchScreen.storyboard */; };
 		5E51F6421ECEE60B00B66255 /* Macauto_MAMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E51F6411ECEE60B00B66255 /* Macauto_MAMTests.m */; };
 		5E51F64D1ECEE60B00B66255 /* Macauto_MAMUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E51F64C1ECEE60B00B66255 /* Macauto_MAMUITests.m */; };
+		5E7F1AEC1F82314900D553F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E7F1AEA1F82314900D553F5 /* InfoPlist.strings */; };
 		87572AC9F8DD9613E573D2E5 /* libPods-Macauto_MAM.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9014EEBE24E7888607892B80 /* libPods-Macauto_MAM.a */; };
 		AB95B62BB968F9666303B325 /* libPods-Macauto_MAMUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85EA580618FA2C8CFFBF68AA /* libPods-Macauto_MAMUITests.a */; };
 /* End PBXBuildFile section */
@@ -75,13 +76,15 @@
 		5E51F6311ECEE60B00B66255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5E51F6331ECEE60B00B66255 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E51F6361ECEE60B00B66255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		5E51F6381ECEE60B00B66255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E51F63D1ECEE60B00B66255 /* Macauto_MAMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Macauto_MAMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E51F6411ECEE60B00B66255 /* Macauto_MAMTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Macauto_MAMTests.m; sourceTree = "<group>"; };
 		5E51F6431ECEE60B00B66255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E51F6481ECEE60B00B66255 /* Macauto_MAMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Macauto_MAMUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E51F64C1ECEE60B00B66255 /* Macauto_MAMUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Macauto_MAMUITests.m; sourceTree = "<group>"; };
 		5E51F64E1ECEE60B00B66255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E7F1AE71F822F4B00D553F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Info.plist; sourceTree = "<group>"; };
+		5E7F1AEB1F82314900D553F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5E7F1AED1F8231A600D553F5 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		85EA580618FA2C8CFFBF68AA /* libPods-Macauto_MAMUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Macauto_MAMUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		894C693F4878DFB02CF2FBD2 /* Pods-Macauto_MAM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Macauto_MAM.release.xcconfig"; path = "Pods/Target Support Files/Pods-Macauto_MAM/Pods-Macauto_MAM.release.xcconfig"; sourceTree = "<group>"; };
 		8B75665A78CDFA8FABBADBA5 /* Pods-Macauto_MAMTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Macauto_MAMTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Macauto_MAMTests/Pods-Macauto_MAMTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -165,7 +168,7 @@
 				5E51F6301ECEE60B00B66255 /* Main.storyboard */,
 				5E51F6331ECEE60B00B66255 /* Assets.xcassets */,
 				5E51F6351ECEE60B00B66255 /* LaunchScreen.storyboard */,
-				5E51F6381ECEE60B00B66255 /* Info.plist */,
+				5E7F1AE81F822F4B00D553F5 /* Info.plist */,
 				5E51F6271ECEE60B00B66255 /* Supporting Files */,
 				5E4E2F071EF7744C004C76C8 /* OpeningViewController.h */,
 				5E4E2F081EF7744C004C76C8 /* OpeningViewController.m */,
@@ -184,6 +187,7 @@
 			children = (
 				5E51F6281ECEE60B00B66255 /* main.m */,
 				5E4E2F041EF77230004C76C8 /* Localizable.strings */,
+				5E7F1AEA1F82314900D553F5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -354,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E4E2F021EF77230004C76C8 /* Localizable.strings in Resources */,
+				5E7F1AEC1F82314900D553F5 /* InfoPlist.strings in Resources */,
 				5E51F6371ECEE60B00B66255 /* LaunchScreen.storyboard in Resources */,
 				5E4E2EFD1EF75E6A004C76C8 /* GoogleService-Info.plist in Resources */,
 				5E51F6341ECEE60B00B66255 /* Assets.xcassets in Resources */,
@@ -589,6 +594,23 @@
 				5E4E2EFF1EF77186004C76C8 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		5E7F1AE81F822F4B00D553F5 /* Info.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E7F1AE71F822F4B00D553F5 /* Base */,
+			);
+			name = Info.plist;
+			sourceTree = "<group>";
+		};
+		5E7F1AEA1F82314900D553F5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E7F1AEB1F82314900D553F5 /* en */,
+				5E7F1AED1F8231A600D553F5 /* zh-Hant */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
